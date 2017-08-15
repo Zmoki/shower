@@ -13,6 +13,10 @@ input[type=range]{
   width: 300px;
 }
 
+input[type=range][hidden] {
+  display: none;
+}
+
 input[type=range]::-webkit-slider-runnable-track {
   display: inline-block;
   width: 300px;
