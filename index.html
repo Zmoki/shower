@@ -128,6 +128,10 @@
 </section>
 
 <section class="slide">
+  <h2 class="place">Stream</h2>
+</section>
+
+<section class="slide">
   <h2>Get stream</h2>
   <pre>
 			<code>const constraints = {video: true, audio: true}</code>
@@ -152,7 +156,7 @@
 
 <section class="slide" id="demo-stream">
   <div class="demo-preview place">
-    <h2>Demo</h2>
+    <h2>Demo: Stream to video</h2>
     <p>Choose this slide to see demo</p>
   </div>
   <video class="demo-video place" hidden></video>
@@ -162,7 +166,72 @@
 </section>
 
 <section class="slide">
-  <h2>Constraints</h2>
+  <h2>Stream to canvas</h2>
+  <pre>
+    <code>stream => {</code>
+    <code>	const $video = document.createElement('<mark>video</mark>')</code>
+    <code>	const $canvas = document.querySelector('<mark>canvas</mark>')</code>
+    <code>  </code>
+    <code>	$video.src = <mark>URL.createObjectURL(stream)</mark></code>
+    <code>	$video.play()</code>
+    <code>    ...</code>
+  </pre>
+</section>
+
+<section class="slide">
+  <h2>Stream to canvas</h2>
+  <pre>
+    <code>	const context = $<mark>canvas.getContext('2d')</mark></code>
+    <code>  </code>
+    <code>	function draw() {</code>
+    <code>	  requestAnimationFrame(draw)</code>
+    <code>	  context<mark>.drawImage</mark>(<mark>$video</mark>, 0, 0, width, height)</code>
+    <code>	}</code>
+    <code>  </code>
+    <code>	<mark>requestAnimationFrame(draw)</mark></code>
+  </pre>
+</section>
+
+<section class="slide" id="demo-canvas">
+  <div class="demo-preview place">
+    <h2>Demo: Stream to canvas</h2>
+    <p>Choose this slide to see demo</p>
+  </div>
+  <canvas class="demo-canvas place" hidden></canvas>
+  <p class="demo-error place" hidden></p>
+  <mark class="demo-notice place" hidden>Yep, it is <b>canvas</b></mark>
+
+  <script src="assets/scripts/demo-canvas.js" async></script>
+</section>
+
+<section class="slide">
+  <h2 class="place">Constraints</h2>
+</section>
+
+<section class="slide">
+  <h2>Supported constraints</h2>
+
+  <pre>
+    <code>const supportedConstraints =</code>
+    <code>  navigator.mediaDevices.<mark>getSupportedConstraints</mark>()</code>
+  </pre>
+</section>
+
+<section class="slide" id="demo-supported-constraints">
+  <h2>Demo: Supported constraints</h2>
+  <ul class="demo-output double"></ul>
+
+  <style>
+    #demo-supported-constraints .demo-output {
+      font-size: 70%;
+      column-count: 3;
+    }
+  </style>
+  <script src="assets/scripts/demo-supported-constraints.js" async></script>
+</section>
+
+<section class="slide">
+  <h2>Video constraints</h2>
 
   <pre>
     <code>const constraints = {</code>
@@ -178,13 +247,17 @@
 
 <section class="slide" id="demo-constraints">
   <div class="demo-preview place">
-    <h2>Demo</h2>
+    <h2>Demo: Video constraints</h2>
     <p>Choose this slide to see demo</p>
   </div>
   <video class="demo-video place" hidden></video>
   <p class="demo-error place" hidden></p>
 
   <script src="assets/scripts/demo-constraints.js" async></script>
+</section>
+
+<section class="slide">
+  <h2 class="place">Capabilities</h2>
 </section>
 
 <section class="slide">
@@ -244,7 +317,7 @@
 
 <section class="slide" id="demo-settings">
   <div class="demo-preview place">
-    <h2>Demo</h2>
+    <h2>Demo: Capabilities</h2>
     <p>Choose this slide to see demo</p>
   </div>
   <video class="demo-video place" hidden></video>
@@ -278,42 +351,105 @@
 </section>
 
 <section class="slide">
-  <h2>Stream to canvas</h2>
+  <h2 class="place">Taking photos</h2>
+</section>
+
+<section class="slide">
+  <h2>Taking photos: <code>drawImage</code></h2>
+
   <pre>
-    <code>stream => {</code>
-    <code>	const $video = document.createElement('<mark>video</mark>')</code>
-    <code>	const $canvas = document.querySelector('<mark>canvas</mark>')</code>
+    <code>const $canvas = document.createElement('canvas')</code>
     <code>  </code>
-    <code>	$video.src = <mark>URL.createObjectURL(stream)</mark></code>
-    <code>	$video.play()</code>
-    <code>    ...</code>
+    <code>const width = $video.videoWidth</code>
+    <code>const height = $video.videoHeight</code>
+    <code>  </code>
+    <code>$canvas.width = width</code>
+    <code>$canvas.height = height</code>
   </pre>
 </section>
 
 <section class="slide">
-  <h2>Stream to canvas</h2>
+  <h2>Taking photos: <code>drawImage</code></h2>
+
   <pre>
-    <code>	const context = $<mark>canvas.getContext('2d')</mark></code>
+    <code>const context = $canvas.getContext('2d')</code>
     <code>  </code>
-    <code>	function draw() {</code>
-    <code>	  requestAnimationFrame(draw)</code>
-    <code>	  context<mark>.drawImage</mark>(<mark>$video</mark>, 0, 0, width, height)</code>
-    <code>	}</code>
-    <code>  </code>
-    <code>	<mark>requestAnimationFrame(draw)</mark></code>
+    <code>context.<mark>drawImage</mark>($video, 0, 0, width, height)</code>
   </pre>
 </section>
 
-<section class="slide" id="demo-canvas">
+<section class="slide">
+  <h2>Taking photos: <code>drawImage</code></h2>
+
+  <pre>
+    <code>$canvas.toBlob(<mark>blob</mark> => {</code>
+    <code>  const $img = document.querySelector('img')</code>
+    <code>  $img.src = <mark>URL.createObjectURL(blob)</mark></code>
+    <code>  </code>
+    <code>  $img.onload = () => URL.revokeObjectURL(url)</code>
+    <code>}</code>
+  </pre>
+</section>
+
+<section class="slide">
+  <h2>Taking photos: <code>ImageCapture</code></h2>
+
+  <pre>
+    <code>stream => {</code>
+    <code>  const streamTrack = stream.getVideoTracks()[0]</code>
+    <code>  const imageCapture = <mark>new ImageCapture</mark>(streamTrack)</code>
+    <code>  ...</code>
+  </pre>
+</section>
+
+<section class="slide">
+  <h2>Taking photos: <code>ImageCapture</code></h2>
+
+  <pre>
+    <code>  imageCapture.<mark>takePhoto</mark>()</code>
+    <code>  .then(blob => {</code>
+    <code>    $img.src = <mark>URL.createObjectURL(blob)</mark></code>
+    <code>  </code>
+    <code>    $img.onload = () => URL.revokeObjectURL(url)</code>
+    <code>  })</code>
+  </pre>
+</section>
+
+<section class="slide" id="demo-photos">
   <div class="demo-preview place">
-    <h2>Demo</h2>
+    <h2>Demo: Taking photos</h2>
     <p>Choose this slide to see demo</p>
   </div>
-  <canvas class="demo-canvas place" hidden></canvas>
+  <div class="demo-output place">
+    <video class="demo-video" hidden></video>
+    <div class="demo-output-result"></div>
+  </div>
   <p class="demo-error place" hidden></p>
-  <mark class="demo-notice place" hidden>Yep, it is <b>canvas</b></mark>
 
-  <script src="assets/scripts/demo-canvas.js" async></script>
+  <style>
+    #demo-photos .demo-output {
+      width: 90%;
+      display: flex;
+      justify-content: flex-start;
+      align-items: flex-start;
+      flex-direction: column;
+    }
+    #demo-photos .demo-img-wrap {
+      position: relative;
+    }
+    #demo-photos .demo-img-wrap::after {
+      content: attr(title);
+      display: block;
+      width: 100%;
+      height: 40px;
+      background: #fafaa2;
+      opacity: 0.8;
+      position: absolute;
+      top: 0;
+      left: 0;
+    }
+  </style>
+  <script src="assets/scripts/demo-photos.js" async></script>
 </section>
 
 <section class="slide">
@@ -321,7 +457,22 @@
 </section>
 
 <section class="slide">
-  <p>Filters Demo</p>
+  <h2 class="place">Filters</h2>
+</section>
+
+<section class="slide" id="demo-filters">
+  <div class="demo-preview place">
+    <h2>Demo: Filters</h2>
+    <p>Choose this slide to see demo</p>
+  </div>
+  <div class="demo-controls place top" hidden>
+    <button type="button" class="demo-filters-button" data-filter="grayscale"></button>
+    <button type="button" class="demo-filters-button" data-filter="sepia"></button>
+  </div>
+  <video class="demo-video place" hidden></video>
+  <p class="demo-error place" hidden></p>
+
+  <script src="assets/scripts/demo-filters.js" async></script>
 </section>
 
 <section class="slide">
