@@ -27,17 +27,20 @@ window.addEventListener('popstate', () => {
         }
         const drawImage = () => {
           const $canvas = document.createElement('canvas')
-          const width = $video.videoWidth
-          const height = $video.videoHeight
-          $canvas.width = width
-          $canvas.height = height
           const context = $canvas.getContext('2d')
-          context.drawImage($video, 0, 0, width, height)
+
+          $canvas.width = $video.videoWidth
+          $canvas.height = $video.videoHeight
+
+          context.drawImage($video, 0, 0)
+
           $canvas.toBlob(blob => {
             const $img = document.createElement('img')
+
             $img.src = URL.createObjectURL(blob)
             $img.title = 'drawImage'
             $img.onload = () => URL.revokeObjectURL($img.src)
+
             imgToResult($img)
           })
         }

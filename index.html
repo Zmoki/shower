@@ -128,7 +128,7 @@
 </section>
 
 <section class="slide">
-  <h2 class="place">Stream</h2>
+  <h2>Stream video</h2>
 </section>
 
 <section class="slide">
@@ -205,7 +205,7 @@
 </section>
 
 <section class="slide">
-  <h2 class="place">Constraints</h2>
+  <h2>Constraints</h2>
 </section>
 
 <section class="slide">
@@ -257,7 +257,7 @@
 </section>
 
 <section class="slide">
-  <h2 class="place">Capabilities</h2>
+  <h2>Capabilities</h2>
 </section>
 
 <section class="slide">
@@ -351,20 +351,27 @@
 </section>
 
 <section class="slide">
-  <h2 class="place">Taking photos</h2>
+  <h2>Taking photos</h2>
+</section>
+
+<section class="slide">
+  <h2>Taking photos</h2>
+  <div class="place">
+    <h2>Way #1: <code>canvas</code>&nbsp;&&nbsp;<code>drawImage</code></h2>
+    <p>Grab <b>video</b> frame to canvas and save blob to image</p>
+  </div>
 </section>
 
 <section class="slide">
   <h2>Taking photos: <code>drawImage</code></h2>
 
   <pre>
-    <code>const $canvas = document.createElement('canvas')</code>
+    <code>stream => {</code>
+    <code>  ... <span class="comment">// Create video and put stream to video</span></code>
+    <code>  const $canvas = document.createElement('canvas')</code>
     <code>  </code>
-    <code>const width = $video.videoWidth</code>
-    <code>const height = $video.videoHeight</code>
-    <code>  </code>
-    <code>$canvas.width = width</code>
-    <code>$canvas.height = height</code>
+    <code>  $canvas.width = $video.videoWidth</code>
+    <code>  $canvas.height = $video.videoHeight</code>
   </pre>
 </section>
 
@@ -372,9 +379,9 @@
   <h2>Taking photos: <code>drawImage</code></h2>
 
   <pre>
-    <code>const context = $canvas.getContext('2d')</code>
+    <code>  const context = $canvas.getContext('2d')</code>
     <code>  </code>
-    <code>context.<mark>drawImage</mark>($video, 0, 0, width, height)</code>
+    <code>  context.<mark>drawImage</mark>($video, 0, 0)</code>
   </pre>
 </section>
 
@@ -382,28 +389,66 @@
   <h2>Taking photos: <code>drawImage</code></h2>
 
   <pre>
-    <code>$canvas.toBlob(<mark>blob</mark> => {</code>
-    <code>  const $img = document.querySelector('img')</code>
-    <code>  $img.src = <mark>URL.createObjectURL(blob)</mark></code>
+    <code>  $canvas.toBlob(<mark>blob</mark> => {</code>
+    <code>    const $img = document.querySelector('img')</code>
+    <code>    $img.src = <mark>URL.createObjectURL(blob)</mark></code>
     <code>  </code>
-    <code>  $img.onload = () => URL.revokeObjectURL(url)</code>
-    <code>}</code>
+    <code>    $img.onload = () => URL.revokeObjectURL(url)</code>
+    <code>  }</code>
   </pre>
 </section>
 
 <section class="slide">
-  <h2>Taking photos: <code>ImageCapture</code></h2>
+  <h2>Taking photos</h2>
+  <div class="place">
+    <h2>Way #2: <code>ImageCapture</code>&nbsp;&&nbsp;<code>grabFrame</code></h2>
+    <p>Grab <b>stream</b> frame to ImageBitMap and after save blob to image</p>
+  </div>
+</section>
+
+<section class="slide">
+  <h2>Taking photos: <code>grabFrame</code></h2>
+
+  <pre>
+    <code>stream => {</code>
+    <code>  const streamTrack = stream.getVideoTracks()[0]</code>
+    <code>  const imageCapture = new ImageCapture(streamTrack)</code>
+  </pre>
+</section>
+
+<section class="slide">
+  <h2>Taking photos: <code>grabFrame</code></h2>
+
+  <pre>
+    <code>  imageCapture.grabFrame()</code>
+    <code>    .then(imageBitmap => {</code>
+    <code>      ... <span class="comment">// Create canvas and context</span></code>
+    <code>      $canvas.getContext('2d').drawImage(imageBitmap, 0, 0)</code>
+    <code>      $canvas.toBlob(blob => {</code>
+    <code>        ... <span class="comment">// Save blob to image</span></code>
+  </pre>
+</section>
+
+<section class="slide">
+  <h2>Taking photos</h2>
+  <div class="place">
+    <h2>Way #3: <code>ImageCapture</code>&nbsp;&&nbsp;<code>takePhoto</code></h2>
+    <p>Get full resolution photo as Blob from <b>stream</b></p>
+  </div>
+</section>
+
+<section class="slide">
+  <h2>Taking photos: <code>takePhoto</code></h2>
 
   <pre>
     <code>stream => {</code>
     <code>  const streamTrack = stream.getVideoTracks()[0]</code>
     <code>  const imageCapture = <mark>new ImageCapture</mark>(streamTrack)</code>
-    <code>  ...</code>
   </pre>
 </section>
 
 <section class="slide">
-  <h2>Taking photos: <code>ImageCapture</code></h2>
+  <h2>Taking photos: <code>takePhoto</code></h2>
 
   <pre>
     <code>  imageCapture.<mark>takePhoto</mark>()</code>
@@ -453,23 +498,68 @@
 </section>
 
 <section class="slide">
-  <h2 class="shout shrink">Record stream</h2>
+  <h2>Record stream</h2>
+</section>
+
+<section class="slide" id="demo-record">
+  <div class="demo-preview place">
+    <h2>Demo: Record stream</h2>
+    <p>Choose this slide to see demo</p>
+  </div>
+  <div class="demo-controls place top" hidden>
+    <button class="demo-control demo-control_start" type="button">Start record</button>
+    <button class="demo-control demo-control_stop" type="button" hidden>Stop record</button>
+  </div>
+  <video class="demo-video place" hidden></video>
+  <div class="place demo-output"></div>
+  <p class="demo-error place" hidden></p>
+
+  <script src="assets/scripts/demo-record.js" async></script>
 </section>
 
 <section class="slide">
-  <p>Video record Demo</p>
+  <h2>Record stream</h2>
+
+  <pre>
+    <code>stream => {</code>
+    <code>  ... <span class="comment">// Create video and put stream to video</span></code>
+    <code>  let chunks = []</code>
+    <code>  const mediaRecorder = new MediaRecorder(stream)</code>
+  </pre>
 </section>
 
 <section class="slide">
-  <p>Video record how to</p>
+  <h2>Record stream</h2>
+
+  <pre>
+    <code>  $startButton.onclick = () => mediaRecorder.start()</code>
+    <code>  $stopButton.onclick = () => mediaRecorder.stop()</code>
+  </pre>
 </section>
 
 <section class="slide">
-  <p>Canvas Demo</p>
+  <h2>Record stream</h2>
+
+  <pre>
+    <code>  mediaRecorder.ondataavailable = (e) => chunks.push(e.data)</code>
+    <code>  </code>
+    <code>  mediaRecorder.onstop = () => {</code>
+    <code>    const blob = new Blob(chunks, {'type': 'video/webm'})</code>
+  </pre>
 </section>
 
 <section class="slide">
-  <p>Canvas how to</p>
+  <h2>Record stream</h2>
+
+  <pre>
+    <code>    const $recordedVideo = document.createElement('video')</code>
+    <code>    </code>
+    <code>    $recordedVideo.src = URL.createObjectURL(blob)</code>
+    <code>    $recordedVideo.controls = true</code>
+    <code>    $output.append($recordedVideo)</code>
+    <code>  }</code>
+    <code>}</code>
+  </pre>
 </section>
 
 <section class="slide">
@@ -477,7 +567,7 @@
 </section>
 
 <section class="slide">
-  <h2 class="place">Filters</h2>
+  <h2>Filters</h2>
 </section>
 
 <section class="slide" id="demo-filters">
@@ -486,33 +576,83 @@
     <p>Choose this slide to see demo</p>
   </div>
   <div class="demo-controls place top" hidden>
-    <button type="button" class="demo-filters-button" data-filter="grayscale"></button>
-    <button type="button" class="demo-filters-button" data-filter="sepia"></button>
+    <button type="button" class="demo-control" data-filter="original">Original</button>
+    <button type="button" class="demo-control" data-filter="grayscale">Grayscale</button>
+    <button type="button" class="demo-control" data-filter="invert">Invert</button>
+    <button type="button" class="demo-control" data-filter="Toaster">Instagram: Toaster</button>
+    <button type="button" class="demo-take-photo">Take photo</button>
   </div>
-  <video class="demo-video place" hidden></video>
+  <video class="demo-video place" data-filter="original" hidden></video>
+  <div class="demo-output place"></div>
   <p class="demo-error place" hidden></p>
 
+  <style>
+    #demo-filters video[data-filter=original] {
+      filter: none;
+    }
+    #demo-filters video[data-filter=grayscale] {
+      filter: grayscale(100%);
+    }
+    #demo-filters video[data-filter=invert] {
+      filter: invert(100%);
+    }
+    #demo-filters video[data-filter=Toaster] {
+      filter: sepia(0.4) saturate(2.5) hue-rotate(-30deg) contrast(0.67);
+    }
+  </style>
   <script src="assets/scripts/demo-filters.js" async></script>
 </section>
 
 <section class="slide">
-  <p>Filters how to</p>
+  <h2>Filters</h2>
+
+  <p>Just use <b>CSS Filters</b> for video</p>
+
+  <pre>
+    <code>video[data-filter=grayscale] {</code>
+    <code>  filter: grayscale(100%);</code>
+    <code>}</code>
+  </pre>
 </section>
 
 <section class="slide">
-  <p>ASCII Demo</p>
+  <h2>Filters</h2>
+
+  <p>To take photo with filter use <code>drawImage</code> way with tip:</p>
+
+  <pre>
+    <code>context.filter = window</code>
+    <code>  .getComputedStyle($video, null)</code>
+    <code>  .getPropertyValue('filter')</code>
+    <code>  </code>
+    <code>context.drawImage($video, 0, 0)</code>
+  </pre>
 </section>
 
 <section class="slide">
-  <p>ASCII how to</p>
+  <h2>ASCII Video Stream</h2>
 </section>
 
 <section class="slide">
-  <p>Mask Demo</p>
+  <h2>ASCII Demo</h2>
 </section>
 
 <section class="slide">
-  <p>Mask how to</p>
+  <h2>Face mask</h2>
+</section>
+
+<section class="slide" id="demo-mask">
+  <div class="demo-preview place">
+    <h2>Demo: Face mask</h2>
+    <p>Choose this slide to see demo</p>
+  </div>
+  <video class="demo-video place" width="640" height="480" preload autoplay loop muted hidden></video>
+  <canvas class="demo-canvas place" width="640" height="480" hidden></canvas>
+  <p class="demo-error place" hidden></p>
+
+  <script src="https://unpkg.com/tracking@1.1.3/build/tracking-min.js" async></script>
+  <script src="https://unpkg.com/tracking@1.1.3/build/data/face-min.js" async></script>
+  <script src="assets/scripts/demo-mask.js" async></script>
 </section>
 
 <section class="slide">
