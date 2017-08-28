@@ -47,7 +47,7 @@ window.addEventListener('popstate', () => {
         const takePhoto = () => {
           const streamTrack = stream.getVideoTracks()[0]
           const imageCapture = new ImageCapture(streamTrack)
-          imageCapture.takePhoto({imageWidth: 200, imageHeight: 100})
+          imageCapture.takePhoto()
             .then(blob => {
               const $img = document.createElement('img')
               $img.src = URL.createObjectURL(blob)
