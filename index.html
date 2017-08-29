@@ -115,6 +115,10 @@
 </section>
 
 <section class="slide">
+  <h2 class="shout" style="font-size: 80px;">Media&nbsp;Capture and Stream&nbsp;API</h2>
+</section>
+
+<section class="slide">
   <p class="place" style="color: red;">
     <img src="https://ucarecdn.com/b8a7e33c-191f-4553-bb6d-6e5594549f02/noun_332281_cc.svg"
          height="200" alt="webcam">
@@ -124,11 +128,7 @@
 </section>
 
 <section class="slide">
-  <h2 class="place">Media&nbsp;Capture&nbsp;and&nbsp;Stream&nbsp;API</h2>
-</section>
-
-<section class="slide">
-  <h2>Stream video</h2>
+  <h2 class="shout">Stream</h2>
 </section>
 
 <section class="slide">
@@ -143,10 +143,10 @@
 </section>
 
 <section class="slide">
-  <h2>Stream to video</h2>
+  <h2>Stream to video element</h2>
   <pre>
 			<code>stream => {</code>
-			<code>	const $video = document.querySelector('video')</code>
+			<code class="mark">	const $video = document.querySelector('video')</code>
 			<code>	 </code>
 			<code>	$video<mark>.srcObject = stream</mark></code>
 			<code>	$video<mark>.onloadedmetadata</mark> = () => $video<mark>.play()</mark></code>
@@ -156,7 +156,7 @@
 
 <section class="slide" id="demo-stream">
   <div class="demo-preview place">
-    <h2>Demo: Stream to video</h2>
+    <h2>Demo: Stream to video element</h2>
     <p>Choose this slide to see demo</p>
   </div>
   <video class="demo-video place" hidden></video>
@@ -169,26 +169,48 @@
   <h2>Stream to canvas</h2>
   <pre>
     <code>stream => {</code>
-    <code>	const $video = document.createElement('<mark>video</mark>')</code>
-    <code>	const $canvas = document.querySelector('<mark>canvas</mark>')</code>
+    <code class="mark">  const $video = document.createElement('video')</code>
     <code>  </code>
-    <code>	$video.src = <mark>URL.createObjectURL(stream)</mark></code>
-    <code>	$video.play()</code>
-    <code>    ...</code>
+    <code>  $video.srcObject = stream</code>
+    <code>  $video.onloadedmetadata = () => {</code>
+    <code>    $video.play()</code>
+    <code class="comment">    ...</code>
   </pre>
 </section>
 
 <section class="slide">
   <h2>Stream to canvas</h2>
   <pre>
-    <code>	const context = $<mark>canvas.getContext('2d')</mark></code>
-    <code>  </code>
-    <code>	function draw() {</code>
-    <code>	  requestAnimationFrame(draw)</code>
-    <code>	  context<mark>.drawImage</mark>(<mark>$video</mark>, 0, 0, width, height)</code>
-    <code>	}</code>
-    <code>  </code>
-    <code>	<mark>requestAnimationFrame(draw)</mark></code>
+    <code class="comment">    ...</code>
+    <code class="mark">    const $canvas = document.querySelector('canvas')</code>
+    <code>    </code>
+    <code>    $<mark>canvas.width</mark> = $<mark>video.videoWidth</mark></code>
+    <code>    $canvas.height = $video.videoHeight</code>
+    <code class="comment">    ...</code>
+  </pre>
+</section>
+
+<section class="slide">
+  <h2>Stream to canvas</h2>
+  <pre>
+    <code class="comment">    ...</code>
+    <code>    const context = $<mark>canvas.getContext('2d')</mark></code>
+    <code>    </code>
+    <code>    const draw = () => {</code>
+    <code>      context.<mark>drawImage</mark>($<mark>video</mark>, 0, 0)</code>
+    <code>      requestAnimationFrame(draw)</code>
+    <code>    }</code>
+    <code class="comment">    ...</code>
+  </pre>
+</section>
+
+<section class="slide">
+  <h2>Stream to canvas</h2>
+  <pre>
+    <code class="comment">    ...</code>
+    <code>    <mark>requestAnimationFrame(draw)</mark></code>
+    <code>  }</code>
+    <code>}</code>
   </pre>
 </section>
 
@@ -199,13 +221,39 @@
   </div>
   <canvas class="demo-canvas place" hidden></canvas>
   <p class="demo-error place" hidden></p>
-  <mark class="demo-notice place" hidden>Yep, it is <b>canvas</b></mark>
 
   <script src="assets/scripts/demo-canvas.js" async></script>
 </section>
 
+<section class="slide" id="demo-canvas-text">
+  <div class="demo-preview place">
+    <h2>Demo: Stream to canvas</h2>
+    <p>Choose this slide to see demo</p>
+  </div>
+  <canvas class="demo-canvas place" hidden></canvas>
+  <p class="demo-error place" hidden></p>
+</section>
+
+
+<section class="slide" id="demo-canvas-image">
+  <div class="demo-preview place">
+    <h2>Demo: Stream to canvas</h2>
+    <p>Choose this slide to see demo</p>
+  </div>
+  <canvas class="demo-canvas place" hidden></canvas>
+  <p class="demo-error place" hidden></p>
+</section>
+
 <section class="slide">
   <h2>Constraints</h2>
+
+  <pre>
+    <code><mark>const constraints = {video: true, audio: true}</mark></code>
+    <code> </code>
+    <code>navigator.mediaDevices.getUserMedia(constraints)</code>
+    <code>	.then(stream => {...})</code>
+    <code>	.catch(error => {...})</code>
+  </pre>
 </section>
 
 <section class="slide">

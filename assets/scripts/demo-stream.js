@@ -10,7 +10,6 @@ window.addEventListener('popstate', () => {
       audio: false,
     }
 
-
     navigator.mediaDevices.getUserMedia(constraints)
       .then(stream => {
         const $video = $parent.querySelector('.demo-video')
@@ -21,14 +20,14 @@ window.addEventListener('popstate', () => {
 
           $preview.hidden = true
           $video.hidden = false
-
-          window.addEventListener('popstate', () => {
-            (stream.getVideoTracks()[0]).stop()
-
-            $video.hidden = true
-            $preview.hidden = false
-          })
         }
+
+        window.addEventListener('popstate', () => {
+          (stream.getVideoTracks()[0]).stop()
+
+          $preview.hidden = false
+          $video.hidden = true
+        })
       })
       .catch(error => {
         const $el = $parent.querySelector('.demo-error')
