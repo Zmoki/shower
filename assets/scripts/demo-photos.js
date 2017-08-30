@@ -25,6 +25,15 @@ window.addEventListener('popstate', () => {
           wrap.append($img)
           $result.append(wrap)
         }
+        const blobToImage = (blob, title) => {
+          const $img = document.createElement('img')
+
+          $img.src = URL.createObjectURL(blob)
+          $img.title = title
+          $img.onload = () => URL.revokeObjectURL($img.src)
+
+          imgToResult($img)
+        }
         const drawImage = () => {
           const $canvas = document.createElement('canvas')
           const context = $canvas.getContext('2d')
@@ -34,27 +43,13 @@ window.addEventListener('popstate', () => {
 
           context.drawImage($video, 0, 0)
 
-          $canvas.toBlob(blob => {
-            const $img = document.createElement('img')
-
-            $img.src = URL.createObjectURL(blob)
-            $img.title = 'drawImage'
-            $img.onload = () => URL.revokeObjectURL($img.src)
-
-            imgToResult($img)
-          })
+          $canvas.toBlob(blob => blobToImage(blob, 'drawImage'))
         }
         const takePhoto = () => {
           const streamTrack = stream.getVideoTracks()[0]
           const imageCapture = new ImageCapture(streamTrack)
           imageCapture.takePhoto()
-            .then(blob => {
-              const $img = document.createElement('img')
-              $img.src = URL.createObjectURL(blob)
-              $img.title = 'takePhoto'
-              $img.onload = () => URL.revokeObjectURL(url)
-              imgToResult($img)
-            })
+            .then(blob => blobToImage(blob, 'takePhoto'))
         }
         const grabFrame = () => {
           const streamTrack = stream.getVideoTracks()[0]
@@ -66,13 +61,7 @@ window.addEventListener('popstate', () => {
               $canvas.width = imageBitmap.width;
               $canvas.height = imageBitmap.height;
               $canvas.getContext('2d').drawImage(imageBitmap, 0, 0)
-              $canvas.toBlob(blob => {
-                const $img = document.createElement('img')
-                $img.src = URL.createObjectURL(blob)
-                $img.title = 'grabFrame'
-                $img.onload = () => URL.revokeObjectURL($img.src)
-                imgToResult($img)
-              })
+              $canvas.toBlob(blob => blobToImage(blob, 'grabFrame'))
             })
         }
 

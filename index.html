@@ -312,13 +312,12 @@
   <h2>Capabilities</h2>
 
   <pre>
-    <code>$video.onloadedmetadata = () => {</code>
-    <code>  const videoTrack = stream<mark>.getVideoTracks()[0]</mark></code>
-    <code>  const capabilities = videoTrack<mark>.getCapabilities()</mark></code>
+    <code>const videoTrack = stream<mark>.getVideoTracks()[0]</mark></code>
+    <code>const capabilities = videoTrack<mark>.getCapabilities()</mark></code>
     <code>  </code>
-    <code>  if (Object.keys(capabilities).length) {</code>
-    <code>    <span class="comment">// You can configure stream</span></code>
-    <code>  }</code>
+    <code>if (Object.keys(capabilities).length) {</code>
+    <code>  <span class="comment">// You can configure stream</span></code>
+    <code>}</code>
   </pre>
 </section>
 
@@ -346,7 +345,7 @@
     <code>  $zoom.min = capabilities.zoom.min</code>
     <code>  $zoom.max = capabilities.zoom.max</code>
     <code>  $zoom.step = capabilities.zoom.step</code>
-    <code>  ...</code>
+    <code class="comment">  ...</code>
   </pre>
 </section>
 
@@ -354,7 +353,7 @@
   <h2>Capabilities: zoom</h2>
 
   <pre>
-    <code>  ...</code>
+    <code class="comment">  ...</code>
     <code>  $zoom.value = (videoTrack.getSettings()).zoom</code>
     <code>  </code>
     <code>  $zoom.onchange = (e) => videoTrack.applyConstraints({</code>
@@ -399,118 +398,110 @@
 </section>
 
 <section class="slide">
-  <h2>Taking photos</h2>
+  <h2 class="shout">Take photo</h2>
 </section>
 
 <section class="slide">
-  <h2>Taking photos</h2>
+  <h2>Tip: save blob to image</h2>
+
+  <pre>
+    <code>const blobToImage = blob => {</code>
+    <code>  const $img = document.createElement('img')</code>
+    <code>  </code>
+    <code>  $img.src = <mark>URL.createObjectURL(blob)</mark></code>
+    <code>  $img.onload = () => URL.revokeObjectURL($img.src)</code>
+    <code>  </code>
+    <code>  document.querySelector('.output').append($img)</code>
+    <code>}</code>
+  </pre>
+</section>
+
+<section class="slide">
+  <h2>Take photo</h2>
   <div class="place">
     <h2>Way #1: <code>canvas</code>&nbsp;&&nbsp;<code>drawImage</code></h2>
-    <p>Grab <b>video</b> frame to canvas and save blob to image</p>
+    <p>Grab <b>video</b> frame</p>
   </div>
 </section>
 
 <section class="slide">
-  <h2>Taking photos: <code>drawImage</code></h2>
+  <h2>Take photo: <code>drawImage</code></h2>
 
   <pre>
     <code>stream => {</code>
-    <code>  ... <span class="comment">// Create video and put stream to video</span></code>
-    <code>  const $canvas = document.createElement('canvas')</code>
-    <code>  </code>
-    <code>  $canvas.width = $video.videoWidth</code>
-    <code>  $canvas.height = $video.videoHeight</code>
-  </pre>
-</section>
-
-<section class="slide">
-  <h2>Taking photos: <code>drawImage</code></h2>
-
-  <pre>
-    <code>  const context = $canvas.getContext('2d')</code>
-    <code>  </code>
+    <code class="comment">  ... <span class="comment">// Get video element and put stream to that</span></code>
+    <code class="comment">  ... <span class="comment">// Create canvas and context</span></code>
     <code>  context.<mark>drawImage</mark>($video, 0, 0)</code>
+    <code class="comment">  ...</code>
   </pre>
 </section>
 
 <section class="slide">
-  <h2>Taking photos: <code>drawImage</code></h2>
+  <h2>Take photo: <code>drawImage</code></h2>
 
   <pre>
-    <code>  $canvas.toBlob(<mark>blob</mark> => {</code>
-    <code>    const $img = document.querySelector('img')</code>
-    <code>    $img.src = <mark>URL.createObjectURL(blob)</mark></code>
-    <code>  </code>
-    <code>    $img.onload = () => URL.revokeObjectURL(url)</code>
-    <code>  }</code>
+    <code class="comment">  ...</code>
+    <code>  $canvas.<mark>toBlob</mark>(blob => blobToImage(blob))</code>
+    <code>}</code>
   </pre>
 </section>
 
 <section class="slide">
-  <h2>Taking photos</h2>
+  <h2>Take photo</h2>
   <div class="place">
     <h2>Way #2: <code>ImageCapture</code>&nbsp;&&nbsp;<code>grabFrame</code></h2>
-    <p>Grab <b>stream</b> frame to ImageBitMap and after save blob to image</p>
+    <p>Grab <b>stream</b> frame</p>
   </div>
 </section>
 
 <section class="slide">
-  <h2>Taking photos: <code>grabFrame</code></h2>
+  <h2>Take photo: <code>grabFrame</code></h2>
 
   <pre>
     <code>stream => {</code>
     <code>  const streamTrack = stream.getVideoTracks()[0]</code>
-    <code>  const imageCapture = new ImageCapture(streamTrack)</code>
+    <code>  const imageCapture = new <mark>ImageCapture</mark>(streamTrack)</code>
+    <code class="comment">  ...</code>
   </pre>
 </section>
 
 <section class="slide">
-  <h2>Taking photos: <code>grabFrame</code></h2>
+  <h2>Take photo: <code>grabFrame</code></h2>
 
   <pre>
-    <code>  imageCapture.grabFrame()</code>
+    <code class="comment">  ...</code>
+    <code>  imageCapture.<mark>grabFrame</mark>()</code>
     <code>    .then(imageBitmap => {</code>
-    <code>      ... <span class="comment">// Create canvas and context</span></code>
-    <code>      $canvas.getContext('2d').drawImage(imageBitmap, 0, 0)</code>
-    <code>      $canvas.toBlob(blob => {</code>
-    <code>        ... <span class="comment">// Save blob to image</span></code>
+    <code class="comment">      ... <span class="comment">// Create canvas and context</span></code>
+    <code>      context.drawImage(imageBitmap, 0, 0)</code>
+    <code>      $canvas.toBlob(blob => blobToImage(blob))</code>
+    <code>    }</code>
+    <code>}</code>
   </pre>
 </section>
 
 <section class="slide">
-  <h2>Taking photos</h2>
+  <h2>Take photo</h2>
   <div class="place">
     <h2>Way #3: <code>ImageCapture</code>&nbsp;&&nbsp;<code>takePhoto</code></h2>
-    <p>Get full resolution photo as Blob from <b>stream</b></p>
+    <p>Get full resolution photo from <b>stream</b></p>
   </div>
 </section>
 
 <section class="slide">
-  <h2>Taking photos: <code>takePhoto</code></h2>
+  <h2>Take photo: <code>takePhoto</code></h2>
 
   <pre>
-    <code>stream => {</code>
-    <code>  const streamTrack = stream.getVideoTracks()[0]</code>
-    <code>  const imageCapture = <mark>new ImageCapture</mark>(streamTrack)</code>
-  </pre>
-</section>
-
-<section class="slide">
-  <h2>Taking photos: <code>takePhoto</code></h2>
-
-  <pre>
+    <code class="comment">  ...</code>
     <code>  imageCapture.<mark>takePhoto</mark>()</code>
-    <code>  .then(blob => {</code>
-    <code>    $img.src = <mark>URL.createObjectURL(blob)</mark></code>
-    <code>  </code>
-    <code>    $img.onload = () => URL.revokeObjectURL(url)</code>
-    <code>  })</code>
+    <code>  .then(blob => blobToImage(blob))</code>
+    <code>}</code>
   </pre>
 </section>
 
 <section class="slide" id="demo-photos">
   <div class="demo-preview place">
-    <h2>Demo: Taking photos</h2>
+    <h2>Demo: Take photo</h2>
     <p>Choose this slide to see demo</p>
   </div>
   <div class="demo-output place">
@@ -546,7 +537,7 @@
 </section>
 
 <section class="slide">
-  <h2>Record stream</h2>
+  <h2 class="shout">Record</h2>
 </section>
 
 <section class="slide" id="demo-record">
@@ -570,9 +561,10 @@
 
   <pre>
     <code>stream => {</code>
-    <code>  ... <span class="comment">// Create video and put stream to video</span></code>
-    <code>  let chunks = []</code>
-    <code>  const mediaRecorder = new MediaRecorder(stream)</code>
+    <code class="comment">  ... <span class="comment">// Create video and put stream to video</span></code>
+    <code>  let <mark>chunks = []</mark></code>
+    <code>  const mediaRecorder = new <mark>MediaRecorder</mark>(stream)</code>
+    <code class="comment">  ...</code>
   </pre>
 </section>
 
@@ -580,8 +572,10 @@
   <h2>Record stream</h2>
 
   <pre>
+    <code class="comment">  ...</code>
     <code>  $startButton.onclick = () => mediaRecorder.start()</code>
     <code>  $stopButton.onclick = () => mediaRecorder.stop()</code>
+    <code class="comment">  ...</code>
   </pre>
 </section>
 
@@ -589,23 +583,11 @@
   <h2>Record stream</h2>
 
   <pre>
-    <code>  mediaRecorder.ondataavailable = (e) => chunks.push(e.data)</code>
+    <code class="comment">  ...</code>
+    <code>  mediaRecorder.<mark>ondataavailable</mark> = (e) => <mark>chunks.push</mark>(e.data)</code>
     <code>  </code>
-    <code>  mediaRecorder.onstop = () => {</code>
-    <code>    const blob = new Blob(chunks, {'type': 'video/webm'})</code>
-  </pre>
-</section>
-
-<section class="slide">
-  <h2>Record stream</h2>
-
-  <pre>
-    <code>    const $recordedVideo = document.createElement('video')</code>
-    <code>    </code>
-    <code>    $recordedVideo.src = URL.createObjectURL(blob)</code>
-    <code>    $recordedVideo.controls = true</code>
-    <code>    $output.append($recordedVideo)</code>
-    <code>  }</code>
+    <code>  mediaRecorder.<mark>onstop</mark> = () =></code>
+    <code>    blobToVideo(new Blob(chunks, {type: '<mark>video/webm</mark>'}))</code>
     <code>}</code>
   </pre>
 </section>
@@ -704,7 +686,7 @@
 </section>
 
 <section class="slide">
-  <h2 class="shout shrink">What next?</h2>
+  <h2 class="shout shrink">What's next?</h2>
 </section>
 
 <section class="slide">

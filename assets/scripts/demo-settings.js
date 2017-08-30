@@ -7,8 +7,8 @@ window.addEventListener('popstate', () => {
 
     const constraints = {
       video: {
-        width: 1024,
-        height: 640,
+        height: 360,
+        aspectRatio: 4 /3,
         facingMode: 'environment'
       },
       audio: false,
