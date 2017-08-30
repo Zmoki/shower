@@ -14,8 +14,8 @@ window.addEventListener('popstate', () => {
 
     img.src = 'https://ucarecdn.com/9052abaa-dddd-4fa3-b871-ba34071531d4/-/resize/300x300/'
 
-    tracker.setInitialScale(4.7)
-    tracker.setStepSize(3)
+    tracker.setInitialScale(4)
+    tracker.setStepSize(2)
     tracker.setEdgesDensity(0.1)
 
     tracking.track('#demo-mask .demo-video', tracker, {camera: true})
