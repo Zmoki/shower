@@ -226,8 +226,8 @@
   <h3>Performance problems:</h3>
 
   <ol>
-    <li><code>drawImage</code> more often than the frame rate of the video</li>
-    <li class="next">the more pixels, the harder <code>drawImage</code></li>
+    <li>frequency of <code>drawImage</code> calls is higher than the frame rate of the video</li>
+    <li class="next">the more pixels, the more resource-intensive it gets</li>
   </ol>
 </section>
 
@@ -705,8 +705,11 @@
   <h2>ASCII Video Stream</h2>
 </section>
 
-<section class="slide">
-  <h2>ASCII Demo</h2>
+<section class="slide" id="demo-ascii">
+  <div class="place demo-output"></div>
+
+
+  <script src="assets/scripts/demo-ascii.js" async></script>
 </section>
 
 <section class="slide">
@@ -725,6 +728,21 @@
   <script src="https://unpkg.com/tracking@1.1.3/build/tracking-min.js" async></script>
   <script src="https://unpkg.com/tracking@1.1.3/build/data/face-min.js" async></script>
   <script src="assets/scripts/demo-mask.js" async></script>
+</section>
+
+<section class="slide">
+  <h2>Face mask</h2>
+
+  <ul>
+    <li>
+      <a href="https://blog.arnellebalane.com/introduction-to-the-shape-detection-api-e07425396861">
+        Shape Detection API
+      </a>
+    </li>
+    <li>
+      <a href="https://trackingjs.com/">tracking.js</a>
+    </li>
+  </ul>
 </section>
 
 <section class="slide">
@@ -776,7 +794,7 @@
 
 <section class="slide" id="see-more">
   <h2 class="shout">
-    <a href="https://github.com/shower/shower">See more on GitHub</a>
+    <a href="https://github.com/Zmoki/awesome-media-streams/">See more on GitHub</a>
   </h2>
   <style>
     #see-more h2 {
@@ -787,11 +805,21 @@
 
 <section class="slide">
   <h2>Thank you!</h2>
+
+  <div class="place">
+    <h2>
+      <a href="https://goo.gl/EmVRqo">https://goo.gl/EmVRqo</a>
+    </h2>
+    <br>
+    <h2>
+      <a href="https://twitter.com/Zmoki">@Zmoki</a>
+    </h2>
+  </div>
 </section>
 
 
 <footer class="badge">
-  <a href="https://github.com/shower/shower">Fork me on GitHub</a>
+  <a href="https://github.com/Zmoki/talk-webcam-2017-shower">See me on GitHub</a>
 </footer>
 
 <div class="progress"></div>

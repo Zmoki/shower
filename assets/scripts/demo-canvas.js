@@ -32,22 +32,23 @@ window.addEventListener('popstate', () => {
           if (route === '#demo-canvas-image') {
             img = new Image()
 
-            img.src = '//ucarecdn.com/f39dbbf9-e728-47c8-a1d4-81e21a070935/-/crop/250x300/center/'
+            img.src = '//ucarecdn.com/605bbee9-71e6-4dae-b737-537c247eb48b/-/resize/x250/'
           }
 
           const draw = () => {
             context.drawImage($video, 0, 0)
 
             if (!!~['#demo-canvas-text', '#demo-canvas-image'].indexOf(route)) {
-              context.fillStyle = 'white'
+              context.fillStyle = 'red'
               context.font = '80px sans-serif'
               context.textBaseline = 'hanging'
-              context.fillText('wow', 40, 40)
-              context.fillStyle = '#ffd800'
-              context.fillText('such text', 300, 300)
+              context.fillText('BA', 40, 40)
+              context.font = '120px sans-serif'
+              context.fillStyle = '#da4f66'
+              context.fillText('BUMP', 40, 100)
             }
             if (route === '#demo-canvas-image' && img.complete) {
-              context.drawImage(img, 80, 80, 250, 300)
+              context.drawImage(img, 400, 180, 228, 250)
             }
 
             frameDrawed = true
