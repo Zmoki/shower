@@ -5,7 +5,10 @@ window.addEventListener('popstate', () => {
   if (!!~demo.indexOf(route)) {
     const $parent = document.querySelector(route)
     const $preview = $parent.querySelector('.demo-preview')
+    const $canvas = $parent.querySelector('.demo-canvas')
 
+    let frameInterval
+    let frameDrawed
     const constraints = {
       video: true,
       audio: false,
@@ -19,8 +22,6 @@ window.addEventListener('popstate', () => {
         $video.onloadedmetadata = () => {
           $video.play()
 
-          const $canvas = $parent.querySelector('.demo-canvas')
-
           $canvas.width = $video.videoWidth
           $canvas.height = $video.videoHeight
 
@@ -31,7 +32,7 @@ window.addEventListener('popstate', () => {
           if (route === '#demo-canvas-image') {
             img = new Image()
 
-            img.src = 'https://ucarecdn.com/f39dbbf9-e728-47c8-a1d4-81e21a070935/-/crop/250x300/center/'
+            img.src = '//ucarecdn.com/f39dbbf9-e728-47c8-a1d4-81e21a070935/-/crop/250x300/center/'
           }
 
           const draw = () => {
@@ -49,17 +50,27 @@ window.addEventListener('popstate', () => {
               context.drawImage(img, 80, 80, 250, 300)
             }
 
-            requestAnimationFrame(draw)
+            frameDrawed = true
           }
 
-          requestAnimationFrame(draw)
+          const {frameRate} = (stream.getVideoTracks()[0]).getSettings()
+
+          frameDrawed = true
+          frameInterval = setInterval(() => {
+            if (!frameDrawed)
+              return
+
+            frameDrawed = false
+            requestAnimationFrame(draw)
+          }, Math.round(1000 / frameRate))
 
           $preview.hidden = true
           $canvas.hidden = false
         }
 
         window.addEventListener('popstate', () => {
-          (stream.getVideoTracks()[0]).stop()
+          clearInterval(frameInterval)
+          ;(stream.getVideoTracks()[0]).stop()
 
           $preview.hidden = false
           $canvas.hidden = true

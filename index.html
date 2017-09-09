@@ -43,39 +43,11 @@
   </style>
 </section>
 
-<section class="slide black">
-  <!-- https://www.labnol.org/internet/embed-mute-youtube-video/29149/ -->
-  <div id="muteYouTubeVideoPlayer" class="place"></div>
+<section class="slide black" id="spb-video">
+  <div id="spb-video-player" class="place"></div>
 
-  <script async src="https://www.youtube.com/iframe_api"></script>
-  <script>
-    function onYouTubeIframeAPIReady() {
-      var player;
-      player = new YT.Player('muteYouTubeVideoPlayer', {
-        videoId: 'xjRr5oRbwpk', // YouTube Video ID
-        width: 960,               // Player width (in px)
-        height: 540,              // Player height (in px)
-        playerVars: {
-          autoplay: 1,        // Auto-play the video on load
-          controls: 0,        // Show pause/play buttons in player
-          showinfo: 0,        // Hide the video title
-          modestbranding: 1,  // Hide the Youtube Logo
-          loop: 1,            // Run the video in a loop
-          fs: 0,              // Hide the full screen button
-          cc_load_policy: 0, // Hide closed captions
-          iv_load_policy: 3,  // Hide the Video Annotations
-          autohide: 0         // Hide video controls when playing
-        },
-        events: {
-          onReady: function(e) {
-            e.target.mute();
-          }
-        }
-      });
-    }
-
-    // Written by @labnol
-  </script>
+  <script src="assets/scripts/spb-video.js" async></script>
+  <script async src="https://www.youtube.com/iframe_api" async></script>
 </section>
 
 <section class="slide">
@@ -84,21 +56,26 @@
 </section>
 
 <section class="slide">
-  <img src="https://ucarecdn.com/e0367a86-9787-44b1-bc94-878e18ae2928/uploadcare-logo.svg"
+  <img src="https://ucarecdn.com/cfa6474e-b77b-485d-b95a-4a39724c5518/uclogo.svg"
        height="120" alt="Uploadcare" class="place">
 </section>
 
 <section class="slide">
-  <img src="https://ucarecdn.com/021e5297-c1c4-43d4-97fc-6de7dd97c856/"
-       height="540" alt="Widget in action" class="place">
+  <video height="540" autoplay loop muted webkit-playsinline playsinline class="place">
+    <source src="https://ucarecdn.com/7e891678-8a9b-4284-9e4c-b61bc1cf860a/gif2video/-/format/webm/widget.gif" type="video/webm">
+    <source src="https://ucarecdn.com/7e891678-8a9b-4284-9e4c-b61bc1cf860a/gif2video/-/format/mp4/widget.gif" type="video/mp4">
+  </video>
 </section>
 
 <section class="slide">
-  <p class="place">camera tab screenshot will be there</p>
+  <video height="540" autoplay loop muted webkit-playsinline playsinline class="place">
+    <source src="https://ucarecdn.com/060064d9-4210-4c81-9c34-c607a4e8805c/gif2video/-/format/webm/camera-tab.gif" type="video/webm">
+    <source src="https://ucarecdn.com/060064d9-4210-4c81-9c34-c607a4e8805c/gif2video/-/format/mp4/camera-tab.gif" type="video/mp4">
+  </video>
 </section>
 
 <section class="slide">
-  <img src="https://ucarecdn.com/2cc28610-099b-4288-8be8-f0d081ed3cf1/-/crop/1870x460/113,612/"
+  <img src="https://ucarecdn.com/351eaf28-bec8-4abd-bbf5-33ceea81d658/-/crop/1870x460/113,612/"
        width="1000" alt="Browser support of getUserMedia from caniuse" class="place">
 </section>
 
@@ -120,9 +97,9 @@
 
 <section class="slide">
   <p class="place" style="color: red;">
-    <img src="https://ucarecdn.com/b8a7e33c-191f-4553-bb6d-6e5594549f02/noun_332281_cc.svg"
+    <img src="https://ucarecdn.com/3ae2b915-bdd3-49ad-9191-94d3fc168b81/noun_332281_cc.svg"
          height="200" alt="webcam">
-    <img src="https://ucarecdn.com/4b1c5809-14ff-4b17-99a4-6938cdecece5/noun_332222_cc.svg"
+    <img src="https://ucarecdn.com/e80bc828-65bd-4bf0-8960-1a0a737055e1/noun_332222_cc.svg"
          height="200" alt="mic">
   </p>
 </section>
@@ -242,6 +219,71 @@
   </div>
   <canvas class="demo-canvas place" hidden></canvas>
   <p class="demo-error place" hidden></p>
+</section>
+
+<section class="slide">
+  <h2>Stream to canvas</h2>
+  <h3>Performance problems:</h3>
+
+  <ol>
+    <li><code>drawImage</code> more often than the frame rate of the video</li>
+    <li class="next">the more pixels, the harder <code>drawImage</code></li>
+  </ol>
+</section>
+
+<section class="slide black canvas-perf black">
+  <h2 class="place bottom">1280px&nbsp;video&nbsp;to&nbsp;canvas</h2>
+  <img class="cover" src="https://ucarecdn.com/73181fce-18e6-40bb-98da-a9df8460df83/-/crop/2100x1313/0,50/-/resize/1024x/" alt="">
+</section>
+
+<section class="slide">
+  <h2>Stream to canvas</h2>
+  <h3>Solution of performance problems:</h3>
+
+  <pre>
+    <code>let frameDrawed = true</code>
+    <code>const runDraw = () => {</code>
+    <code>  if (!frameDrawed) return</code>
+    <code>  frameDrawed = false</code>
+    <code>  requestAnimationFrame(draw)</code>
+    <code>}</code>
+  </pre>
+</section>
+
+<section class="slide">
+  <h2>Stream to canvas</h2>
+  <h3>Solution of performance problems:</h3>
+
+  <pre>
+    <code>const streamTrack = stream.getVideoTracks()[0]</code>
+    <code>const {frameRate} = streamTrack.getSettings()</code>
+    <code>const delay = 1000 / frameRate</code>
+    <code>  </code>
+    <code>let frameInterval = setInterval(runDraw, delay)</code>
+  </pre>
+</section>
+
+<section class="slide">
+  <h2>Stream to canvas</h2>
+  <h3>Solution of performance problems:</h3>
+
+  <pre>
+    <code>const draw = () => {</code>
+    <code class="comment">  ...</code>
+    <code>  <s>requestAnimationFrame(draw)</s></code>
+    <code>  frameDrawed = true</code>
+    <code>}</code>
+  </pre>
+</section>
+
+<section class="slide black canvas-perf">
+  <h2 class="place bottom">1280px&nbsp;video&nbsp;to&nbsp;canvas</h2>
+  <h3 class="place">requestAnimationFrame <span class="heart">❤</span> setInterval</h3>
+  <img class="cover" src="https://ucarecdn.com/db2eb183-8038-445e-a411-f4c1ea2195a4/-/crop/2100x1313/0,50/-/resize/1024x/" alt="">
+</section>
+
+<section class="slide">
+  <h2>Constraints</h2>
 </section>
 
 <section class="slide">
