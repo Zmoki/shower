@@ -32,24 +32,28 @@
     "shower-ribbon": "^2.1.0"
   },
   "devDependencies": {
-    "browser-sync": "^2.18.12",
+    "browser-sync": "^2.26.7",
     "del": "^3.0.0",
     "fs": "0.0.2",
     "gulp": "^3.9.1",
     "gulp-gh-pages": "^0.5.4",
-    "gulp-rename": "^1.2.2",
+    "gulp-rename": "^1.4.0",
     "gulp-replace": "^0.6.1",
-    "gulp-rsync": "0.0.8",
-    "gulp-zip": "^4.0.0",
-    "merge-stream": "^1.0.0",
+    "gulp-rsync": "0.0.9",
+    "gulp-zip": "^4.2.0",
+    "merge-stream": "^1.0.1",
     "path-exists-cli": "^1.0.0",
-    "run-sequence": "^2.1.0"
+    "run-sequence": "^2.2.1"
   },
   "scripts": {
     "start": "gulp",
     "prepare": "gulp prepare",
     "archive": "gulp archive",
     "publish": "gulp publish",
-    "test": "npm run prepare && ls prepared && npm run archive && path-exists archive.zip"
+    "test": "npm run prepare && ls prepared && npm run archive && path-exists archive.zip",
+    "preinstall": "npx npm-force-resolutions"
+  },
+  "resolutions": {
+    "graceful-fs": "4.2.3"
   }
 }
