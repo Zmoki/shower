@@ -12,7 +12,7 @@ window.addEventListener('popstate', () => {
 
     const img = new Image()
 
-    img.src = 'https://ucarecdn.com/58fb3ffc-bcb7-4b07-a087-fdb8dd619928/-/resize/300x300/'
+    img.src = 'https://ucarecdn.com/58fb3ffc-bcb7-4b07-a087-fdb8dd619928/-/resize/340x340/'
 
     tracker.setInitialScale(4)
     tracker.setStepSize(2)

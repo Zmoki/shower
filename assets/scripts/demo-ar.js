@@ -12,7 +12,7 @@ window.addEventListener('popstate', () => {
     $iframe.frameBorder = 0
     $iframe.width = 640
     $iframe.height = 480
-    $iframe.src = 'ar.html'
+    $iframe.src = '/ar.html'
 
     $output.append($iframe)
 

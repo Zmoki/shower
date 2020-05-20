@@ -13,102 +13,96 @@
 <header class="caption">
   <h1>Playful webcam</h1>
   <p>
-    <a href="https://zmoki.github.io/">Zarema Khalilova</a>, <a href="https://uploadcare.com/">Uploadcare</a>
+    <a href="https://zmoki.github.io/">Zarema Khalilova</a>, <a href="https://realadvisor.com/">RealAdvisor</a>
   </p>
 </header>
 
 <section class="slide black" id="cover">
   <h2>Playful webcam</h2>
-  <p>Zarema Khalilova</p>
+  <p>by Zarema Khalilova</p>
 
   <style>
+    #cover {
+      text-align: center;
+    }
     #cover h2 {
-      margin: 170px 0 0;
-      color: #FFF;
+      margin: 100px 0 0;
       text-align: center;
-      font-size: 70px;
+      font-size: 90px;
     }
-
     #cover p {
-      margin: 10px 0 0;
-      text-align: center;
-      color: #FFF;
+      margin: 10px 0 20px;
       font-style: italic;
-      font-size: 20px;
-    }
-
-    #cover p a {
-      color: #FFF;
+      font-size: 40px;
     }
   </style>
 </section>
 
-<section class="slide black" id="spb-video">
-  <div id="spb-video-player" class="place"></div>
 
-  <script src="assets/scripts/spb-video.js" async></script>
-  <script async src="https://www.youtube.com/iframe_api" async></script>
+<section class="slide black" id="spb">
+  <h2 class="shout shout-over">I'm from Saint-Petersburg, Russia</h2>
+
+  <img src="./pictures/spb.png" alt="" class="cover">
 </section>
 
-<section class="slide">
-  <img src="https://pp.userapi.com/c637216/v637216518/27f4e/K1wwjF-BVpg.jpg"
-       height="540" alt="SPB Frontend" class="place">
+<section class="slide black" id="spb-frontend">
+  <h2 class="shout shout-over">I'm founder of the community</h2>
+  <img src="./pictures/spb-frontend.jpg" alt="SPB Frontend" class="cover">
+
+  <style>
+    #spb-frontend .shout {
+      top: calc(50% - 180px);
+    }
+  </style>
 </section>
 
-<section class="slide">
-  <img src="https://ucarecdn.com/cfa6474e-b77b-485d-b95a-4a39724c5518/uclogo.svg"
-       height="120" alt="Uploadcare" class="place">
+<section class="slide black" id="realadvisor">
+  <h2 class="shout shout-over">currently working with RealAdvisor</h2>
+  <img src="./pictures/realadvisor.png" alt="" class="cover">
 </section>
 
-<section class="slide">
-  <video height="540" autoplay loop muted webkit-playsinline playsinline class="place">
-    <source src="https://ucarecdn.com/7e891678-8a9b-4284-9e4c-b61bc1cf860a/gif2video/-/format/webm/widget.gif" type="video/webm">
-    <source src="https://ucarecdn.com/7e891678-8a9b-4284-9e4c-b61bc1cf860a/gif2video/-/format/mp4/widget.gif" type="video/mp4">
-  </video>
+<section class="slide black" id="uploadcare" style="text-align: center;">
+  <h2>previously worked with</br>
+  <img src="./pictures/uploadcare.svg"
+       height="auto" alt="Uploadcare"></h2>
+
+  <figure>
+    <video height="350" autoplay loop muted webkit-playsinline playsinline>
+      <source src="https://ucarecdn.com/7e891678-8a9b-4284-9e4c-b61bc1cf860a/gif2video/-/format/webm/widget.gif" type="video/webm">
+      <source src="https://ucarecdn.com/7e891678-8a9b-4284-9e4c-b61bc1cf860a/gif2video/-/format/mp4/widget.gif" type="video/mp4">
+    </video>
+    <figcaption class="vertical-caption">
+      Uploadcare Widget &uarr;
+    </figcaption>
+  </figure>
+
 </section>
 
-<section class="slide">
-  <video height="540" autoplay loop muted webkit-playsinline playsinline class="place">
-    <source src="https://ucarecdn.com/060064d9-4210-4c81-9c34-c607a4e8805c/gif2video/-/format/webm/camera-tab.gif" type="video/webm">
-    <source src="https://ucarecdn.com/060064d9-4210-4c81-9c34-c607a4e8805c/gif2video/-/format/mp4/camera-tab.gif" type="video/mp4">
-  </video>
+<section class="slide black" style="text-align: center;" id="u-webcam-tab">
+  <figure>
+    <video height="440" autoplay loop muted webkit-playsinline playsinline>
+      <source src="https://ucarecdn.com/060064d9-4210-4c81-9c34-c607a4e8805c/gif2video/-/format/webm/camera-tab.gif" type="video/webm">
+      <source src="https://ucarecdn.com/060064d9-4210-4c81-9c34-c607a4e8805c/gif2video/-/format/mp4/camera-tab.gif" type="video/mp4">
+    </video>
+    <figcaption class="vertical-caption">Webcam source tab &uarr;</figcaption>
+  </figure>
+
+  <style>
+    #u-webcam-tab .vertical-caption {
+      left: -8%;
+    }
+  </style>
 </section>
 
-<section class="slide">
-  <img src="https://ucarecdn.com/351eaf28-bec8-4abd-bbf5-33ceea81d658/-/crop/1870x460/113,612/"
-       width="1000" alt="Browser support of getUserMedia from caniuse" class="place">
-</section>
-
-<section class="slide">
-  <p class="place" style="top: calc(50% - 70px);">
-    <img src="https://images.apple.com/v/safari/g/images/overview/safari_icon_large_2x.png"
-         alt="Safari">
-  </p>
-  <p class="place" style="top: calc(50% + 70px);">
-    <a href="https://webkit.org/blog/7726/announcing-webrtc-and-media-capture/">
-      <b>will support</b> Media Capture and Stream API
-    </a>
-  </p>
-</section>
-
-<section class="slide">
+<section class="slide black">
   <h2 class="shout" style="font-size: 80px;">Media&nbsp;Capture and Stream&nbsp;API</h2>
 </section>
 
-<section class="slide">
-  <p class="place" style="color: red;">
-    <img src="https://ucarecdn.com/3ae2b915-bdd3-49ad-9191-94d3fc168b81/noun_332281_cc.svg"
-         height="200" alt="webcam">
-    <img src="https://ucarecdn.com/e80bc828-65bd-4bf0-8960-1a0a737055e1/noun_332222_cc.svg"
-         height="200" alt="mic">
-  </p>
-</section>
-
-<section class="slide">
+<section class="slide black">
   <h2 class="shout">Stream</h2>
 </section>
 
-<section class="slide">
+<section class="slide black">
   <h2>Get stream</h2>
   <pre>
 			<code>const constraints = {video: true, audio: true}</code>
@@ -119,7 +113,7 @@
 		</pre>
 </section>
 
-<section class="slide">
+<section class="slide black">
   <h2>Stream to video element</h2>
   <pre>
 			<code>stream => {</code>
@@ -131,7 +125,7 @@
 		</pre>
 </section>
 
-<section class="slide" id="demo-stream">
+<section class="slide black" id="demo-stream">
   <div class="demo-preview place">
     <h2>Demo: Stream to video element</h2>
     <p>Choose this slide to see demo</p>
@@ -142,7 +136,7 @@
   <script src="assets/scripts/demo-stream.js" async></script>
 </section>
 
-<section class="slide">
+<section class="slide black">
   <h2>Stream to canvas</h2>
   <pre>
     <code>stream => {</code>
@@ -155,7 +149,7 @@
   </pre>
 </section>
 
-<section class="slide">
+<section class="slide black">
   <h2>Stream to canvas</h2>
   <pre>
     <code class="comment">    ...</code>
@@ -167,7 +161,7 @@
   </pre>
 </section>
 
-<section class="slide">
+<section class="slide black">
   <h2>Stream to canvas</h2>
   <pre>
     <code class="comment">    ...</code>
@@ -181,7 +175,7 @@
   </pre>
 </section>
 
-<section class="slide">
+<section class="slide black">
   <h2>Stream to canvas</h2>
   <pre>
     <code class="comment">    ...</code>
@@ -191,7 +185,7 @@
   </pre>
 </section>
 
-<section class="slide" id="demo-canvas">
+<section class="slide black" id="demo-canvas">
   <div class="demo-preview place">
     <h2>Demo: Stream to canvas</h2>
     <p>Choose this slide to see demo</p>
@@ -202,7 +196,7 @@
   <script src="assets/scripts/demo-canvas.js" async></script>
 </section>
 
-<section class="slide" id="demo-canvas-text">
+<section class="slide black" id="demo-canvas-text">
   <div class="demo-preview place">
     <h2>Demo: Stream to canvas</h2>
     <p>Choose this slide to see demo</p>
@@ -212,7 +206,7 @@
 </section>
 
 
-<section class="slide" id="demo-canvas-image">
+<section class="slide black" id="demo-canvas-image">
   <div class="demo-preview place">
     <h2>Demo: Stream to canvas</h2>
     <p>Choose this slide to see demo</p>
@@ -221,7 +215,7 @@
   <p class="demo-error place" hidden></p>
 </section>
 
-<section class="slide">
+<section class="slide black">
   <h2>Stream to canvas</h2>
   <h3>Performance problems:</h3>
 
@@ -236,7 +230,7 @@
   <img class="cover" src="https://ucarecdn.com/73181fce-18e6-40bb-98da-a9df8460df83/-/crop/2100x1313/0,50/-/resize/1024x/" alt="">
 </section>
 
-<section class="slide">
+<section class="slide black">
   <h2>Stream to canvas</h2>
   <h3>Solution of performance problems:</h3>
 
@@ -250,7 +244,7 @@
   </pre>
 </section>
 
-<section class="slide">
+<section class="slide black">
   <h2>Stream to canvas</h2>
   <h3>Solution of performance problems:</h3>
 
@@ -263,7 +257,7 @@
   </pre>
 </section>
 
-<section class="slide">
+<section class="slide black">
   <h2>Stream to canvas</h2>
   <h3>Solution of performance problems:</h3>
 
@@ -282,11 +276,11 @@
   <img class="cover" src="https://ucarecdn.com/db2eb183-8038-445e-a411-f4c1ea2195a4/-/crop/2100x1313/0,50/-/resize/1024x/" alt="">
 </section>
 
-<section class="slide">
+<section class="slide black">
   <h2>Constraints</h2>
 </section>
 
-<section class="slide">
+<section class="slide black">
   <h2>Constraints</h2>
 
   <pre>
@@ -298,7 +292,7 @@
   </pre>
 </section>
 
-<section class="slide">
+<section class="slide black">
   <h2>Supported constraints</h2>
 
   <pre>
@@ -307,7 +301,7 @@
   </pre>
 </section>
 
-<section class="slide" id="demo-supported-constraints">
+<section class="slide black" id="demo-supported-constraints">
   <h2>Demo: Supported constraints</h2>
   <ul class="demo-output double"></ul>
 
@@ -320,7 +314,7 @@
   <script src="assets/scripts/demo-supported-constraints.js" async></script>
 </section>
 
-<section class="slide">
+<section class="slide black">
   <h2>Video constraints</h2>
 
   <pre>
@@ -335,7 +329,7 @@
   </pre>
 </section>
 
-<section class="slide" id="demo-constraints">
+<section class="slide black" id="demo-constraints">
   <div class="demo-preview place">
     <h2>Demo: Video constraints</h2>
     <p>Choose this slide to see demo</p>
@@ -346,11 +340,11 @@
   <script src="assets/scripts/demo-constraints.js" async></script>
 </section>
 
-<section class="slide">
+<section class="slide black">
   <h2>Capabilities</h2>
 </section>
 
-<section class="slide">
+<section class="slide black">
   <h2>Capabilities</h2>
 
   <pre>
@@ -363,7 +357,7 @@
   </pre>
 </section>
 
-<section class="slide">
+<section class="slide black">
   <h2>Capabilities: torch</h2>
 
   <pre>
@@ -377,7 +371,7 @@
   </pre>
 </section>
 
-<section class="slide">
+<section class="slide black">
   <h2>Capabilities: zoom</h2>
 
   <pre>
@@ -391,7 +385,7 @@
   </pre>
 </section>
 
-<section class="slide">
+<section class="slide black">
   <h2>Capabilities: zoom</h2>
 
   <pre>
@@ -404,7 +398,7 @@
   </pre>
 </section>
 
-<section class="slide" id="demo-settings">
+<section class="slide black" id="demo-settings">
   <div class="demo-preview place">
     <h2>Demo: Capabilities</h2>
     <p>Choose this slide to see demo</p>
@@ -439,11 +433,11 @@
   </style>
 </section>
 
-<section class="slide">
+<section class="slide black">
   <h2 class="shout">Take photo</h2>
 </section>
 
-<section class="slide">
+<section class="slide black">
   <h2>Tip: save blob to image</h2>
 
   <pre>
@@ -458,7 +452,7 @@
   </pre>
 </section>
 
-<section class="slide">
+<section class="slide black">
   <h2>Take photo</h2>
   <div class="place">
     <h2>Way #1: <code>canvas</code>&nbsp;&&nbsp;<code>drawImage</code></h2>
@@ -466,7 +460,7 @@
   </div>
 </section>
 
-<section class="slide">
+<section class="slide black">
   <h2>Take photo: <code>drawImage</code></h2>
 
   <pre>
@@ -478,7 +472,7 @@
   </pre>
 </section>
 
-<section class="slide">
+<section class="slide black">
   <h2>Take photo: <code>drawImage</code></h2>
 
   <pre>
@@ -488,7 +482,7 @@
   </pre>
 </section>
 
-<section class="slide">
+<section class="slide black">
   <h2>Take photo</h2>
   <div class="place">
     <h2>Way #2: <code>ImageCapture</code>&nbsp;&&nbsp;<code>grabFrame</code></h2>
@@ -496,7 +490,7 @@
   </div>
 </section>
 
-<section class="slide">
+<section class="slide black">
   <h2>Take photo: <code>grabFrame</code></h2>
 
   <pre>
@@ -507,7 +501,7 @@
   </pre>
 </section>
 
-<section class="slide">
+<section class="slide black">
   <h2>Take photo: <code>grabFrame</code></h2>
 
   <pre>
@@ -522,7 +516,7 @@
   </pre>
 </section>
 
-<section class="slide">
+<section class="slide black">
   <h2>Take photo</h2>
   <div class="place">
     <h2>Way #3: <code>ImageCapture</code>&nbsp;&&nbsp;<code>takePhoto</code></h2>
@@ -530,7 +524,7 @@
   </div>
 </section>
 
-<section class="slide">
+<section class="slide black">
   <h2>Take photo: <code>takePhoto</code></h2>
 
   <pre>
@@ -541,7 +535,7 @@
   </pre>
 </section>
 
-<section class="slide" id="demo-photos">
+<section class="slide black" id="demo-photos">
   <div class="demo-preview place">
     <h2>Demo: Take photo</h2>
     <p>Choose this slide to see demo</p>
@@ -554,6 +548,11 @@
 
   <style>
     #demo-photos .demo-output {
+      max-width: 100%;
+      max-height: 100%;
+      overflow: scroll;
+    }
+    #demo-photos .demo-output-result {
       width: 90%;
       display: flex;
       justify-content: flex-start;
@@ -568,8 +567,7 @@
       display: block;
       width: 100%;
       height: 40px;
-      background: #fafaa2;
-      opacity: 0.8;
+      background: rgba(0, 0, 0, 0.5);
       position: absolute;
       top: 0;
       left: 0;
@@ -578,11 +576,11 @@
   <script src="assets/scripts/demo-photos.js" async></script>
 </section>
 
-<section class="slide">
+<section class="slide black">
   <h2 class="shout">Record</h2>
 </section>
 
-<section class="slide" id="demo-record">
+<section class="slide black" id="demo-record">
   <div class="demo-preview place">
     <h2>Demo: Record stream</h2>
     <p>Choose this slide to see demo</p>
@@ -598,7 +596,7 @@
   <script src="assets/scripts/demo-record.js" async></script>
 </section>
 
-<section class="slide">
+<section class="slide black">
   <h2>Record stream</h2>
 
   <pre>
@@ -610,7 +608,7 @@
   </pre>
 </section>
 
-<section class="slide">
+<section class="slide black">
   <h2>Record stream</h2>
 
   <pre>
@@ -621,7 +619,7 @@
   </pre>
 </section>
 
-<section class="slide">
+<section class="slide black">
   <h2>Record stream</h2>
 
   <pre>
@@ -634,15 +632,15 @@
   </pre>
 </section>
 
-<section class="slide">
+<section class="slide black">
   <h2 class="shout shrink">Let's fun</h2>
 </section>
 
-<section class="slide">
+<section class="slide black">
   <h2>Filters</h2>
 </section>
 
-<section class="slide" id="demo-filters">
+<section class="slide black" id="demo-filters">
   <div class="demo-preview place">
     <h2>Demo: Filters</h2>
     <p>Choose this slide to see demo</p>
@@ -675,7 +673,7 @@
   <script src="assets/scripts/demo-filters.js" async></script>
 </section>
 
-<section class="slide">
+<section class="slide black">
   <h2>Filters</h2>
 
   <p>Just use <b>CSS Filters</b> for video</p>
@@ -687,7 +685,7 @@
   </pre>
 </section>
 
-<section class="slide">
+<section class="slide black">
   <h2>Filters</h2>
 
   <p>To take photo with filter use <code>drawImage</code> way with tip:</p>
@@ -701,22 +699,41 @@
   </pre>
 </section>
 
-<section class="slide">
+<section class="slide black">
   <h2>ASCII Video Stream</h2>
 </section>
 
-<section class="slide" id="demo-ascii">
-  <div class="place demo-output"></div>
+<section class="slide black" id="demo-ascii">
+  <p id="ascii-info">Please allow this page to access your camera.</p>
+  <div id="ascii-notSupported">
+    <p>Your browser does not support the Camera API.</p>
+  </div>
+  <pre id="ascii-stream" class="place"></pre>
+  <button id="ascii-button">start</button>
 
+  <script src="assets/scripts/ascii/camera.js"></script>
+  <script src="assets/scripts/ascii/ascii.js"></script>
+  <script src="assets/scripts/ascii/app.js"></script>
 
-  <script src="assets/scripts/demo-ascii.js" async></script>
+  <style>
+    #ascii-notSupported, #ascii-button {
+      display: none;
+    }
+    #ascii-stream {
+      font-family: 'Courier New', 'Courier', monospace;
+      font-size: 10px;
+      line-height: 10px;
+      letter-spacing: -1.5px;
+      text-align: center;
+    }
+  </style>
 </section>
 
-<section class="slide">
+<section class="slide black">
   <h2>Face mask</h2>
 </section>
 
-<section class="slide" id="demo-mask">
+<section class="slide black" id="demo-mask">
   <div class="demo-preview place">
     <h2>Demo: Face mask</h2>
     <p>Choose this slide to see demo</p>
@@ -725,12 +742,12 @@
   <canvas class="demo-canvas place" width="640" height="480" hidden></canvas>
   <p class="demo-error place" hidden></p>
 
-  <script src="https://unpkg.com/tracking@1.1.3/build/tracking-min.js" async></script>
-  <script src="https://unpkg.com/tracking@1.1.3/build/data/face-min.js" async></script>
+  <script src="assets/scripts/tracking/tracking-min.js" async></script>
+  <script src="assets/scripts/tracking/face-min.js" async></script>
   <script src="assets/scripts/demo-mask.js" async></script>
 </section>
 
-<section class="slide">
+<section class="slide black">
   <h2>Face mask</h2>
 
   <ul>
@@ -745,18 +762,18 @@
   </ul>
 </section>
 
-<section class="slide">
+<section class="slide black">
   <h2>Augmented reality</h2>
 </section>
 
-<section class="slide" id="demo-ar">
+<section class="slide black" id="demo-ar">
   <div class="place demo-output"></div>
 
 
   <script src="assets/scripts/demo-ar.js" async></script>
 </section>
 
-<section class="slide">
+<section class="slide black">
   <h2>Augmented reality</h2>
 
   <pre>
@@ -765,7 +782,7 @@
   </pre>
 </section>
 
-<section class="slide">
+<section class="slide black">
   <h2>Augmented reality</h2>
 
   <pre>
@@ -778,11 +795,11 @@
   </pre>
 </section>
 
-<section class="slide">
+<section class="slide black">
   <h2 class="shout shrink">What's next?</h2>
 </section>
 
-<section class="slide">
+<section class="slide black">
   <h2>You can do</h2>
 
   <ol>
@@ -792,7 +809,7 @@
   </ol>
 </section>
 
-<section class="slide" id="see-more">
+<section class="slide black" id="see-more">
   <h2 class="shout">
     <a href="https://github.com/Zmoki/awesome-media-streams/">See more on GitHub</a>
   </h2>
@@ -803,7 +820,7 @@
   </style>
 </section>
 
-<section class="slide">
+<section class="slide black">
   <h2>Thank you!</h2>
 
   <div class="place">
